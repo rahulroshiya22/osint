@@ -152,7 +152,7 @@ async function performLookup(botKey) {
     const btn = document.getElementById(`btn-${botKey}`);
     const rc = document.getElementById(`result-${botKey}`);
 
-    rc.innerHTML = `<div class="result-card"><div class="result-header"><div class="status">⏳ Extracting Intel...</div></div><div class="result-body"><div class="skeleton-box"></div><div class="skeleton-box" style="width:70%"></div></div></div>`;
+    rc.innerHTML = `<div class="result-card"><div class="result-header"><div class="status">⏳ Data fetching...</div></div><div class="result-body"><div class="hacker-loader"><div class="hacker-loader-line"></div></div><p class="hacker-loader-text blink">Bypassing security protocols & extracting intel...</p></div></div>`;
     setButtonLoading(btn, true);
 
     try {
