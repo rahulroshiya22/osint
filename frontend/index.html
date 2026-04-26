@@ -1,50 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>INFO HUB BY RAHUL</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-
-
-    <!-- Animated Hacker Background -->
+    <!-- Matrix Background -->
     <canvas id="matrix-bg"></canvas>
 
-    <!-- ═══════════ INTRO ANIMATION ═══════════ -->
+    <!-- ═══════════ INTRO ═══════════ -->
     <div id="intro-screen" class="intro-screen active">
         <div class="intro-content">
-            <div class="logo-icon-3d intro-logo">🔥</div>
+            <div class="intro-logo">🔥</div>
             <h1 class="intro-title">SYSTEM <span class="accent">INITIALIZING</span></h1>
             <div class="intro-loader"></div>
         </div>
     </div>
 
-    <!-- ═══════════ AUTH SCREENS ═══════════ -->
+    <!-- ═══════════ AUTH ═══════════ -->
     <div id="auth-screen" class="screen">
         <div class="auth-container">
             <div class="auth-logo">
-                <div class="logo-icon-3d">🔥</div>
-                <h1>INFO HUB <span class="accent">BY RAHUL</span></h1>
-                <p class="tagline">Restricted Access</p>
+                <div class="intro-logo">🔥</div>
+                <h1>INFO HUB</h1>
+                <p class="tagline">BY RAHUL — Restricted</p>
             </div>
 
             <div id="login-form" class="auth-form glass-card">
-                <h2>Enter Password</h2>
+                <h2>ENTER ACCESS CODE</h2>
                 <div class="input-group">
-                    <input type="password" id="login-password" placeholder="Access Code..."
+                    <input type="password" id="login-password" placeholder="••••••••"
                         onkeydown="if(event.key==='Enter')verifyPassword()">
                 </div>
                 <button id="login-btn" class="btn-3d" onclick="verifyPassword()">
-                    <span class="btn-text">Unlock</span>
-                    <span class="btn-loader hidden"></span>
+                    <span class="btn-text">UNLOCK SYSTEM</span>
+                    <span class="btn-loader hidden">...</span>
                 </button>
             </div>
 
@@ -52,43 +45,42 @@
         </div>
     </div>
 
-    <!-- ═══════════ PENDING SCREEN ═══════════ -->
+    <!-- ═══════════ PENDING ═══════════ -->
     <div id="pending-screen" class="screen">
-        <div class="pending-container glass-card">
-            <div class="icon-3d pulse">⏳</div>
-            <h2>Pending Approval</h2>
-            <p>Admin needs to verify your account.</p>
-            <button class="btn-3d outline" onclick="handleLogout()">Logout</button>
+        <div class="pending-container glass-card" style="padding: 40px; text-align: center;">
+            <div class="intro-logo" style="font-size: 3rem;">⏳</div>
+            <h2 style="font-family: var(--font-mono); margin: 20px 0;">ACCESS PENDING</h2>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 30px;">Administrator verification required for this terminal.</p>
+            <button class="btn-3d outline" onclick="handleLogout()">TERMINATE SESSION</button>
         </div>
     </div>
 
     <!-- ═══════════ DASHBOARD ═══════════ -->
     <div id="dashboard-screen" class="screen">
-
-        <!-- Top Navigation -->
+        
         <header class="top-nav glass-card">
             <div class="nav-brand">
-                <div class="logo-icon-3d small">🔥</div>
-                <span class="brand-text">INFO HUB BY RAHUL</span>
+                <span class="accent">HUB</span>.RAHUL // <span id="user-status">ONLINE</span>
             </div>
+            <div class="logo-icon-3d small" style="font-size: 1.2rem;">🔥</div>
+        </header>
 
-        <!-- Main Content Area -->
         <main class="main-content">
-            <!-- ══ Tool Panels ══ -->
+            <!-- Tool Panels will be injected here -->
             <div id="panel-number_to_info" class="tool-panel active"></div>
         </main>
 
-        <!-- Mobile Bottom Navigation -->
-        <nav class="bottom-nav glass-card">
-            <div class="nav-tabs" id="nav-tabs">
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-tabs" id="nav-tabs" style="display: flex; gap: 40px;">
                 <button class="tab-btn active" data-tab="number_to_info" onclick="switchTab('number_to_info')">
-                    <div class="icon-3d-text">📱</div>
-                    <span>Intel</span>
+                    <span class="icon-3d-text">📱</span>
+                    <span>INTEL</span>
                 </button>
             </div>
-            <button class="tab-btn logout-btn" onclick="handleLogout()">
-                <div class="icon-3d-text">🚪</div>
-                <span>Logout</span>
+            <button class="tab-btn" onclick="handleLogout()" style="color: #ff4444;">
+                <span class="icon-3d-text">🚪</span>
+                <span>EXIT</span>
             </button>
         </nav>
     </div>
@@ -98,5 +90,4 @@
 
     <script src="main.js"></script>
 </body>
-
 </html>
