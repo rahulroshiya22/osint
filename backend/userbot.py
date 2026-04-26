@@ -35,7 +35,7 @@ BOTS = {
         "description": "Get information from phone number",
         "icon": "📱",
         "input_label": "Phone Number",
-        "input_placeholder": "e.g. 9925792212 (No +91, No Space)",
+        "input_placeholder": "e.g. 1234567890 (No +91, No Space)",
     },
     "aadhaar_to_family": {
         "username": "Aadhar2Family_AKbot",
