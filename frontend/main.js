@@ -175,8 +175,15 @@ function buildToolPanels() {
 
 // ──────────────── Lookup ────────────────
 async function performLookup(botKey) {
-    const input = document.getElementById(`input-${botKey}`).value.trim();
+    let input = document.getElementById(`input-${botKey}`).value.trim();
     if (!input) return showToast('INPUT REQUIRED', 'error');
+
+    // Auto-clean for phone and Aadhaar
+    if (botKey === 'number_to_info') {
+        input = input.replace(/\+91/g, '').replace(/\s/g, '');
+    } else if (botKey === 'aadhaar_to_family') {
+        input = input.replace(/\s/g, '');
+    }
 
     const btn = document.getElementById(`btn-${botKey}`);
     const rc = document.getElementById(`result-${botKey}`);
