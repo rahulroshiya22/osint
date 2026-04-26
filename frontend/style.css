@@ -63,31 +63,31 @@ a:hover { text-decoration: underline; }
 .accent { color: var(--accent-primary); }
 .danger { color: var(--error); }
 
-/* ─── Animated 3D Background ─── */
-.bg-animated {
+/* ─── Animated Hacker Background ─── */
+canvas#matrix-bg {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: -1;
-    overflow: hidden;
-    background: radial-gradient(circle at center, #fff 0%, #ffedd5 100%);
+    pointer-events: none;
+    opacity: 0.8;
 }
 
-.shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.6;
-    animation: float 12s ease-in-out infinite alternate;
-}
-
-.shape-1 { width: 50vw; height: 50vw; background: rgba(255, 166, 0, 0.4); top: -10vw; left: -10vw; animation-delay: 0s; }
-.shape-2 { width: 40vw; height: 40vw; background: rgba(255, 60, 0, 0.3); bottom: -10vw; right: -5vw; animation-delay: -3s; }
-.shape-3 { width: 30vw; height: 30vw; background: rgba(255, 200, 0, 0.4); top: 20vw; right: 10vw; animation-delay: -6s; }
-.shape-4 { width: 25vw; height: 25vw; background: rgba(255, 107, 0, 0.3); bottom: 10vw; left: 15vw; animation-delay: -9s; }
-
-@keyframes float {
-    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-    100% { transform: translate(40px, -40px) scale(1.1) rotate(10deg); }
+/* ─── Desktop Blocker ─── */
+#desktop-blocker { display: none; }
+@media (min-width: 600px) {
+    #desktop-blocker {
+        display: flex; position: fixed; inset: 0;
+        background: var(--bg-primary); z-index: 999999;
+        align-items: center; justify-content: center;
+        text-align: center; padding: 20px;
+    }
+    .blocker-content {
+        padding: 40px; max-width: 400px; margin: 0 auto;
+    }
+    .blocker-content h2 { color: var(--accent-primary); margin: 20px 0; font-size: 2rem; }
+    .blocker-content p { color: var(--text-secondary); font-size: 1.1rem; }
+    
+    body > *:not(#desktop-blocker, canvas#matrix-bg) { display: none !important; }
 }
 
 /* ─── Glass & 3D Elements ─── */
@@ -251,39 +251,41 @@ a:hover { text-decoration: underline; }
 .pending-container h2 { margin: 20px 0 10px; color: var(--accent-primary); }
 .pending-container p { margin-bottom: 30px; color: var(--text-secondary); }
 
-/* ─── Top Navigation ─── */
+/* ─── Top Navigation (Mobile Version) ─── */
 .top-nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 30px; margin: 20px auto; width: 95%; max-width: 1400px;
-    z-index: 50; position: sticky; top: 20px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px 20px; margin: 0 auto; width: 100%;
+    z-index: 50; position: sticky; top: 0;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 .nav-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.5rem; color: var(--accent-primary); }
 
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 10px 20px; z-index: 100;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border-bottom: none;
+}
 .nav-tabs {
-    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
-    background: rgba(255,255,255,0.5); padding: 6px; border-radius: var(--radius-full);
+    display: flex; gap: 10px; flex: 1; justify-content: center;
 }
 .tab-btn {
-    background: transparent; border: none; padding: 10px 20px;
-    font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
-    color: var(--text-secondary); cursor: pointer; border-radius: var(--radius-full);
-    transition: var(--transition); display: flex; align-items: center; gap: 6px;
+    background: transparent; border: none; padding: 10px;
+    font-family: var(--font-body); font-weight: 700; font-size: 0.85rem;
+    color: var(--text-secondary); cursor: pointer; border-radius: var(--radius-md);
+    transition: var(--transition); display: flex; flex-direction: column; align-items: center; gap: 4px;
 }
+.tab-btn .icon-3d-text { margin: 0; font-size: 1.5rem; }
 .tab-btn:hover { background: rgba(255,255,255,0.8); transform: translateY(-2px); }
 .tab-btn.active {
     background: var(--gradient-main); color: white;
     box-shadow: 0 4px 15px rgba(255,107,0,0.4);
-    transform: scale(1.05);
+    transform: translateY(-5px) scale(1.05);
 }
-
-.nav-user { position: relative; }
-.user-btn {
-    background: white; border: 2px solid var(--border-glass); padding: 10px 20px;
-    border-radius: var(--radius-full); font-family: var(--font-body); font-weight: 700;
-    cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: var(--transition);
-}
-.user-btn:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+.logout-btn { color: var(--error); margin-left: auto; }
+.logout-btn:hover { background: #fee2e2; }
 
 .dropdown { position: relative; display: inline-block; }
 .dropdown-content {
@@ -443,10 +445,8 @@ a:hover { text-decoration: underline; }
 @keyframes slideOutRight { to { transform: translateX(100%); opacity: 0; } }
 
 /* ─── Responsive ─── */
-@media (max-width: 900px) {
-    .top-nav { flex-direction: column; gap: 20px; padding: 20px; border-radius: var(--radius-md); }
-    .nav-tabs { width: 100%; overflow-x: auto; justify-content: flex-start; padding: 10px; border-radius: var(--radius-md); }
-    .tab-btn { white-space: nowrap; }
+@media (max-width: 600px) {
+    .main-content { padding-bottom: 90px; } /* Space for bottom nav */
     .search-box { flex-direction: column; background: transparent; box-shadow: none; border: none; padding: 0; }
     .search-box input { background: white; border: 2px solid var(--border-glass); border-radius: var(--radius-full); padding: 15px 20px; margin-bottom: 15px; }
     .search-box .btn-3d { width: 100%; border-radius: var(--radius-full); }

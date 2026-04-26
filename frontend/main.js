@@ -23,7 +23,45 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (f) verifyPassword();
         }
     });
+
+    initMatrixBackground();
 });
+
+// ──────────────── Matrix Background ────────────────
+function initMatrixBackground() {
+    const canvas = document.getElementById('matrix-bg');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~'.split('');
+    const fontSize = 14;
+    let columns = width / fontSize;
+    const drops = [];
+    for(let x = 0; x < columns; x++) drops[x] = 1;
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(255, 250, 240, 0.1)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(255, 107, 0, 0.35)'; // Hacker orange vibe
+        ctx.font = fontSize + 'px "JetBrains Mono", monospace';
+
+        for(let i = 0; i < drops.length; i++) {
+            const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if(drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 50);
+}
 
 // ──────────────── API ────────────────
 async function apiRequest(method, path, body = null) {
@@ -57,7 +95,6 @@ async function verifyPassword() {
         const d = await apiPost('/api/verify', { password: p });
         if (d.success) {
             localStorage.setItem('token', '#rahul#123_verified');
-            showToast('Access Granted', 'success');
             await initDashboard();
         } else {
             showAuthMessage('Invalid access code');

@@ -13,13 +13,17 @@
 
 <body>
 
-    <!-- Animated 3D Background -->
-    <div class="bg-animated">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
+    <!-- Desktop Blocker -->
+    <div id="desktop-blocker">
+        <div class="blocker-content glass-card">
+            <div class="logo-icon-3d">📵</div>
+            <h2>Mobile Only</h2>
+            <p>This system is restricted to mobile devices. Please access from your phone.</p>
+        </div>
     </div>
+
+    <!-- Animated Hacker Background -->
+    <canvas id="matrix-bg"></canvas>
 
     <!-- ═══════════ INTRO ANIMATION ═══════════ -->
     <div id="intro-screen" class="intro-screen active">
@@ -75,26 +79,25 @@
                 <span class="brand-text">OSINT</span>
             </div>
 
-            <div class="nav-tabs" id="nav-tabs">
-                <button class="tab-btn active" data-tab="number_to_info" onclick="switchTab('number_to_info')">
-                    <span class="icon-3d-text">📱</span> Number Intel
-                </button>
-            </div>
-
-            <div class="nav-user">
-                <button class="user-btn" onclick="handleLogout()">
-                    <span class="icon-3d-text">🚪</span> Logout
-                </button>
-            </div>
-        </header>
-
         <!-- Main Content Area -->
         <main class="main-content">
-
             <!-- ══ Tool Panels ══ -->
             <div id="panel-number_to_info" class="tool-panel active"></div>
-
         </main>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="bottom-nav glass-card">
+            <div class="nav-tabs" id="nav-tabs">
+                <button class="tab-btn active" data-tab="number_to_info" onclick="switchTab('number_to_info')">
+                    <div class="icon-3d-text">📱</div>
+                    <span>Intel</span>
+                </button>
+            </div>
+            <button class="tab-btn logout-btn" onclick="handleLogout()">
+                <div class="icon-3d-text">🚪</div>
+                <span>Logout</span>
+            </button>
+        </nav>
     </div>
 
     <!-- Toasts -->
